@@ -123,6 +123,13 @@ def make_archive(folder: str) -> str:
 
 
 def main() -> None:
+    # Windows 控制台默认 cp1252，直接 print 中文会 UnicodeEncodeError
+    for _s in (sys.stdout, sys.stderr):
+        try:
+            _s.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, OSError, ValueError):
+            pass
+
     ap = argparse.ArgumentParser(description="组装灵瞳发布包")
     ap.add_argument("--version", required=True, help="版本号，如 1.2.4")
     ap.add_argument("--dist", default=os.path.join(ROOT, "dist"),
