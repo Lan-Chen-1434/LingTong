@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "name": "键盘操作-键盘输入文本",
+  "description": "演示「键盘输入文本」：像人一样逐字打字，支持中文与 {{变量}}。运行前先打开记事本（macOS 用 TextEdit）并点一下编辑区，让光标停在目标位置。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示键盘输入文本：先整体覆盖一段文字，再不清空、直接追加一句。运行前请先打开记事本（macOS 打开 TextEdit），并确认光标在编辑区内。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "key.type",
+      "params": {
+        "text": "你好，灵瞳！这一整段会被当作一次输入。",
+        "clear_first": true,
+        "press_enter": true
+      },
+      "enabled": true,
+      "note": "「输入内容」可换成自己的文字，支持 {{变量}}；含中文会自动走剪贴板。运行前请把焦点放到目标输入框。",
+      "children": []
+    },
+    {
+      "type_id": "key.type",
+      "params": {
+        "text": "（这一句是不清空、直接追加在后面的。）",
+        "clear_first": false,
+        "interval": 0.05
+      },
+      "enabled": true,
+      "note": "「输入前先清空」关闭 = 往已有内容中间/末尾插入；字符间隔可调快慢。",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成：学会覆盖输入与追加输入。改成自己的场景：把「输入内容」换成目标文字，按需开关「输入前先清空 / 输入后按回车」即可。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "version": "1.0",
+  "name": "鼠标操作-鼠标点击（坐标）",
+  "description": "演示在固定屏幕坐标单击、双击、右键点击。运行前请打开任意窗口（如记事本），并把坐标改成你屏幕上目标点的位置；坐标可用 Windows 截图工具（Win+Shift+S）查看，macOS 对应位置用同样的像素坐标即可。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示：按坐标单击、双击、右键点击。2 秒后开始，请先打开一个窗口（如记事本），并把后续步骤的坐标改成你屏幕上的目标位置。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "mouse.click",
+      "params": {
+        "x": 520,
+        "y": 360,
+        "button": "左键",
+        "clicks": 1,
+        "duration": 0.3,
+        "use_var": false,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "把坐标 X/Y 改成你要点击的位置；如果点不中，把移动耗时调大到 0.3~0.5 秒",
+      "children": []
+    },
+    {
+      "type_id": "mouse.click",
+      "params": {
+        "x": 800,
+        "y": 600,
+        "button": "左键",
+        "clicks": 2,
+        "duration": 0.3,
+        "use_var": false,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "双击演示（打开文件/文件夹），坐标同样要改成你自己的",
+      "children": []
+    },
+    {
+      "type_id": "mouse.click",
+      "params": {
+        "x": 400,
+        "y": 300,
+        "button": "右键",
+        "clicks": 1,
+        "duration": 0.3,
+        "use_var": false,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "右键演示：在目标位置弹出上下文菜单，坐标改成你自己的",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "演示完成 ✔ 把三个点击步骤的坐标换成你自己的目标点即可用于实际场景；坐标也可配合图像识别结果用变量传入（坐标来自变量）。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

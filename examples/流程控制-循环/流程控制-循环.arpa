@@ -1,0 +1,63 @@
+{
+ "version": "1.0",
+ "name": "流程控制-循环",
+ "description": "演示「循环」：固定次数循环 3 轮，用序号变量 {{i}} 打印轮数、并在循环内累加变量。运行无需准备。",
+ "hotkey_run": "f9",
+ "hotkey_stop": "f12",
+ "start_delay": 2.0,
+ "nodes": [
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "本示例演示「循环」：第 2 步把固定次数的循环跑 3 轮，每轮打印序号 {{i}} 并累加 total。运行无需准备。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "flow.loop",
+   "params": {
+    "mode": "固定次数",
+    "times": 3,
+    "loop_index_name": "i"
+   },
+   "enabled": true,
+   "note": "循环方式可改：遍历变量（数据来源填 {{rows}}，循环里用 {{item.列名}} 取当前行）、条件循环（配「最大次数保护」防死循环）、无限循环（配合「跳出循环」结束）。",
+   "children": [
+    {
+     "type_id": "data.set_var",
+     "params": {
+      "name": "total",
+      "op": "数字相加",
+      "value": "1"
+     },
+     "enabled": true,
+     "note": "演示在循环内累加：total 未定义时按 0 起算。",
+     "children": []
+    },
+    {
+     "type_id": "util.log",
+     "params": {
+      "level": "信息",
+      "message": "第 {{i}}/3 次循环，total 已累加到 {{total}}"
+     },
+     "enabled": true,
+     "note": "",
+     "children": []
+    }
+   ]
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "成功",
+    "message": "完成：固定次数循环跑完 3 轮。改成自己的场景：循环方式选「遍历变量」、数据来源填 {{rows}}（表格/列表/字典），把逐条处理的步骤拖进循环里。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  }
+ ]
+}

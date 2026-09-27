@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "name": "键盘操作-按住松开按键",
+  "description": "演示「按住/松开按键」：按住 shift 不放，此时鼠标点选即为连选，最后松开。运行前请打开文件资源管理器（macOS 用 Finder）等可多选的窗口。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示按住/松开按键：先按住 shift，中间用鼠标点选即为连选，最后松开 shift。运行前请打开文件资源管理器（macOS 用 Finder）窗口。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "key.hold",
+      "params": {
+        "key": "shift",
+        "action": "按住"
+      },
+      "enabled": true,
+      "note": "「动作」按住：按键按下不放；按住 ctrl 再拖鼠标则可多选区域。",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "现在 shift 处于按住状态：请手动用鼠标点击 2~3 个文件（连选）。真实场景里这里会放鼠标点击节点。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "key.hold",
+      "params": {
+        "key": "shift",
+        "action": "松开"
+      },
+      "enabled": true,
+      "note": "「动作」松开：与上面的「按住」配对使用，两个动作之间的鼠标操作都带 shift。",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成：学会按住/松开按键。改成自己的场景：按住 shift 配合鼠标点选做连选，或按住 ctrl 拖鼠标做框选。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

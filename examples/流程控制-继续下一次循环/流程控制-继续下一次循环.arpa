@@ -1,0 +1,61 @@
+{
+ "version": "1.0",
+ "name": "流程控制-继续下一次循环",
+ "description": "演示「继续下一次循环」：前 2 轮跳过循环里剩余的步骤，直接进入下一轮。运行无需准备。",
+ "hotkey_run": "f9",
+ "hotkey_stop": "f12",
+ "start_delay": 2.0,
+ "nodes": [
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "本示例演示「继续下一次循环」：循环共 5 轮，前 2 轮命中条件、跳过剩余步骤，所以日志只出现在第 3~5 轮。运行无需准备。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "flow.loop",
+   "params": {
+    "mode": "固定次数",
+    "times": 5,
+    "loop_index_name": "i"
+   },
+   "enabled": true,
+   "note": "循环次数与跳过条件按场景调整。",
+   "children": [
+    {
+     "type_id": "flow.continue",
+     "params": {
+      "condition": "{{i}} <= 2"
+     },
+     "enabled": true,
+     "note": "条件留空 = 每轮都无条件跳过剩余步骤；这里用来跳过表头等前几条。",
+     "children": []
+    },
+    {
+     "type_id": "util.log",
+     "params": {
+      "level": "信息",
+      "message": "第 {{i}} 次循环（前 2 轮被「继续下一次循环」跳过了）"
+     },
+     "enabled": true,
+     "note": "",
+     "children": []
+    }
+   ]
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "成功",
+    "message": "完成：前 2 轮被跳过，日志只打印了 3 次。改成自己的场景：用条件筛掉空行、表头或不需要处理的条目。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  }
+ ]
+}

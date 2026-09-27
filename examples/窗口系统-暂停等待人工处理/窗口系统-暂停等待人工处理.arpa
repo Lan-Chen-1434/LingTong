@@ -1,0 +1,40 @@
+{
+ "version": "1.0",
+ "name": "窗口系统-暂停等待人工处理",
+ "description": "演示「暂停等待人工处理」：流程挂起，等你在控制台点击「继续」后恢复。运行后请到控制台/日志面板点「继续」。",
+ "hotkey_run": "f9",
+ "hotkey_stop": "f12",
+ "start_delay": 2.0,
+ "nodes": [
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "本示例演示「暂停等待人工处理」：第 2 步流程挂起，请在控制台点击「继续」恢复执行。适合输验证码、扫码等人工环节。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "sys.pause_resume",
+   "params": {
+    "message": "演示暂停：请在控制台点击「继续」，流程才会往下走",
+    "auto_seconds": 0.0
+   },
+   "enabled": true,
+   "note": "自动继续等待 填 30 之类 = 超时自动继续（适合限时人工操作）；0 = 一直等人工继续。",
+   "children": []
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "成功",
+    "message": "完成：已人工继续。改成自己的场景：放在需要人工介入的步骤之前，提示文字写清要人做什么。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  }
+ ]
+}

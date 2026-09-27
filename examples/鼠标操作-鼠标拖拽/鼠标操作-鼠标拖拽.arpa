@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "name": "鼠标操作-鼠标拖拽",
+  "description": "演示按住鼠标从一个点拖到另一个点，适合拖滑块、选中一段文本、拖文件进文件夹。运行前请打开画图、网页滑块或文本编辑器（macOS 可用 TextEdit 选中文本演示），并把起止坐标改成实际可拖拽的位置。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示：鼠标拖拽（按住从 A 点拖到 B 点）。2 秒后开始，请先打开可拖拽的目标（如画图、网页滑块或文本编辑器），并把拖拽步骤的起止坐标改成实际位置。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "mouse.move",
+      "params": {
+        "x": 300,
+        "y": 500,
+        "mode": "绝对坐标",
+        "duration": 0.4
+      },
+      "enabled": true,
+      "note": "先把鼠标移到拖拽起点（可选步骤），起点坐标与下面拖拽步骤一致",
+      "children": []
+    },
+    {
+      "type_id": "mouse.drag",
+      "params": {
+        "x1": 300,
+        "y1": 500,
+        "x2": 650,
+        "y2": 500,
+        "button": "左键",
+        "duration": 0.8,
+        "hold": 0.2
+      },
+      "enabled": true,
+      "note": "把起点 X1/Y1、终点 X2/Y2 改成你要拖的位置；拖滑块验证码时耗时 0.5~1 秒更像人工",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "演示完成 ✔ 把起止坐标换成你自己的拖拽路径即可；选中文本可把 Y1/Y2 设为同一行，拖文件则终点填目标文件夹图标坐标。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

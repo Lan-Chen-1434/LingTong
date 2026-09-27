@@ -1,0 +1,66 @@
+{
+  "version": "1.0",
+  "name": "鼠标操作-鼠标移动到",
+  "description": "演示把鼠标移动到指定坐标（不点击），含绝对坐标与相对偏移两种模式，常用于悬停弹出菜单。运行前无需准备，观察鼠标轨迹即可。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示：鼠标移动到指定坐标（不点击）。2 秒后开始，请观察鼠标轨迹。运行前无需准备任何窗口。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "mouse.move",
+      "params": {
+        "x": 600,
+        "y": 200,
+        "mode": "绝对坐标",
+        "duration": 0.5
+      },
+      "enabled": true,
+      "note": "绝对坐标：从屏幕左上角起算，改成你要悬停的位置；悬停弹出菜单时保持 0.5 秒左右的耗时更自然",
+      "children": []
+    },
+    {
+      "type_id": "mouse.move",
+      "params": {
+        "x": 20,
+        "y": 20,
+        "mode": "相对当前位置",
+        "duration": 0.2
+      },
+      "enabled": true,
+      "note": "相对当前位置：在刚才的位置基础上向右下微调 20 像素",
+      "children": []
+    },
+    {
+      "type_id": "mouse.move",
+      "params": {
+        "x": 100,
+        "y": 100,
+        "mode": "绝对坐标",
+        "duration": 0.0
+      },
+      "enabled": true,
+      "note": "瞬间跳回屏幕左上角附近（耗时 0 表示瞬间移动）",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "演示完成 ✔ 把绝对坐标步骤的目标改成你要悬停/跳转的位置即可；悬停触发下拉菜单时记得用较慢的移动耗时。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

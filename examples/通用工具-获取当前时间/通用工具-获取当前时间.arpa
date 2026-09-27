@@ -1,0 +1,66 @@
+{
+  "version": "1.0",
+  "name": "通用工具-获取当前时间",
+  "description": "演示获取当前时间：按预设格式把时间文本存入变量，常用于拼不重复的文件名。运行前无需准备。Windows/macOS 一致。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "message": "本示例演示「获取当前时间」：取紧凑日期存入 now_time，再演示拼文件名。",
+        "level": "信息",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.current_time",
+      "params": {
+        "fmt": "紧凑日期（20260926）",
+        "save_var": "now_time",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "时间格式按需选择（日期/时间/日期时间/中文日期/时间戳等）；存入变量可改名",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "message": "now_time = {{now_time}}；拼文件名示例：report_{{now_time}}.xlsx",
+        "level": "信息",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成。配合「写入文件」把路径填成 output/excel/report_{{now_time}}.xlsx 即可得到带时间戳的文件名。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "version": "1.0",
+  "name": "窗口系统-运行程序、打开文件",
+  "description": "演示「运行程序 / 打开文件」：启动记事本并等待加载。运行后会真的弹出记事本，请手动关闭；macOS 请按步骤备注改用 open -a TextEdit。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示「运行程序 / 打开文件」：第 2 步启动记事本并等 1.5 秒。运行后会真的弹出记事本，请手动关闭。macOS 写法见第 2 步备注。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "sys.run",
+      "params": {
+        "path": "notepad.exe",
+        "wait": 1.5,
+        "args": "",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "Windows 演示填 notepad.exe；macOS 填 /usr/bin/open、启动参数填 -a TextEdit（或直接填 TextEdit 可执行文件的绝对路径）；填 https:// 开头的网址会用默认浏览器打开。",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成：程序已启动。改成自己的场景：换程序或文件路径，需要带参数就填「启动参数」（多个参数用空格分隔）。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

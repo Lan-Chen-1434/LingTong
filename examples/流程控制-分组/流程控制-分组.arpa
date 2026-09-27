@@ -1,0 +1,61 @@
+{
+ "version": "1.0",
+ "name": "流程控制-分组",
+ "description": "演示「分组」：仅用于归类整理步骤，不影响执行顺序。运行无需准备。",
+ "hotkey_run": "f9",
+ "hotkey_stop": "f12",
+ "start_delay": 2.0,
+ "nodes": [
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "本示例演示「分组」：第 2 步里的两个日志步骤在分组内照常依次执行，分组本身不改变任何顺序。运行无需准备。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "flow.group",
+   "params": {
+    "title": "演示分组",
+    "collapse": false
+   },
+   "enabled": true,
+   "note": "把相关步骤拖进分组仅为了界面整洁；步骤多时可开「默认折叠」。",
+   "children": [
+    {
+     "type_id": "util.log",
+     "params": {
+      "level": "信息",
+      "message": "我是分组里的第 1 个步骤"
+     },
+     "enabled": true,
+     "note": "",
+     "children": []
+    },
+    {
+     "type_id": "util.log",
+     "params": {
+      "level": "信息",
+      "message": "我是分组里的第 2 个步骤"
+     },
+     "enabled": true,
+     "note": "",
+     "children": []
+    }
+   ]
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "成功",
+    "message": "完成：分组内的步骤按原顺序执行完毕。改成自己的场景：按「公共登录 / 数据抓取」等主题把长流程归类，可开「默认折叠」只看标题。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  }
+ ]
+}

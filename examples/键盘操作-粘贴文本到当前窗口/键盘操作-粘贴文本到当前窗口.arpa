@@ -1,0 +1,39 @@
+{
+  "version": "1.0",
+  "name": "键盘操作-粘贴文本到当前窗口",
+  "description": "演示「粘贴文本到当前窗口」：整段文本放进剪贴板再 Ctrl+V，比逐字输入快得多。运行前请先打开记事本（macOS 用 TextEdit）并点一下编辑区。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示粘贴文本：把一段长文本整体粘贴进当前焦点窗口。运行前请先打开记事本（macOS 用 TextEdit），并确认光标在编辑区内。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "key.paste_text",
+      "params": {
+        "text": "第一行：长文本走剪贴板粘贴，速度比逐字输入快得多。\n第二行：适合填长表单、整段模板内容。\n第三行：粘贴完成后剪贴板会自动还原。"
+      },
+      "enabled": true,
+      "note": "「粘贴内容」支持 {{变量}}；「粘贴前清空」开启=整段覆盖，关闭=插入到光标处。macOS 上粘贴等价于 ⌘+V。",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成：学会整段粘贴。改成自己的场景：把「粘贴内容」换成自己的模板文字，按需关闭「粘贴后还原剪贴板」。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

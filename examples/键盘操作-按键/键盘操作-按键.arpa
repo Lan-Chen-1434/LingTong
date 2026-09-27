@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "name": "键盘操作-按键",
+  "description": "演示「按键」：按单个按键多次，例如连续按向下键翻列表。运行前请打开一个列表类窗口（如文件资源管理器或记事本文档）。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示按键：连按 5 次向下键模拟翻列表，再按回车打开选中项。运行前请打开一个列表类窗口，如文件资源管理器（macOS 用 Finder）。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "key.press",
+      "params": {
+        "key": "down",
+        "times": 5,
+        "interval": 0.1
+      },
+      "enabled": true,
+      "note": "「按键」从下拉列表选；「次数」「间隔」按目标软件的响应速度调整。",
+      "children": []
+    },
+    {
+      "type_id": "key.press",
+      "params": {
+        "key": "enter",
+        "wait_after": 0.5
+      },
+      "enabled": true,
+      "note": "「按完等待」给软件留出响应时间，页面慢就调大。",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成：学会单键连按。改成自己的场景：把「按键」换成 pageup/pagedown 翻页、tab 切换焦点等，配合「次数」即可。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

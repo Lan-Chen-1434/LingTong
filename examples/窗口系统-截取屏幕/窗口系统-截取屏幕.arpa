@@ -1,0 +1,47 @@
+{
+ "version": "1.0",
+ "name": "窗口系统-截取屏幕",
+ "description": "演示「截取屏幕」：全屏截图保存到本流程文件夹的 output/image/。运行无需准备。",
+ "hotkey_run": "f9",
+ "hotkey_stop": "f12",
+ "start_delay": 2.0,
+ "nodes": [
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "本示例演示「截取屏幕」：第 2 步全屏截图，保存到本流程文件夹的 output/image/ 目录。运行无需准备。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "sys.screenshot",
+   "params": {},
+   "enabled": true,
+   "note": "保存路径默认 output/image/screen_{{timestamp}}.png（{{timestamp}} 自动替换为当前时间，避免覆盖）；范围改「自定义区域」可只截局部，点「框选区域」拖选。",
+   "children": []
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "截图已保存，请到本流程文件夹的 output/image/ 查看。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "成功",
+    "message": "完成：截图已保存。改成自己的场景：固定区域留证选「自定义区域」，文件名可拼 {{变量}}。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  }
+ ]
+}

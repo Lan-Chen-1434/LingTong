@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "name": "通用工具-输出日志",
+  "description": "演示用输出日志标记流程节点、核对变量取值。运行前无需准备；配合获取系统信息节点演示 {{变量}} 插值。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "message": "本示例演示「输出日志」：在日志面板打印信息、标记流程走到哪。",
+        "level": "信息",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "说明本示例演示什么",
+      "children": []
+    },
+    {
+      "type_id": "util.system_info",
+      "params": {
+        "save_var": "sys_info",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "先取一条系统信息当变量，只为给下面的日志提供 {{变量}} 演示素材；不需要可删掉",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "分辨率 {{sys_info.screen_width}}×{{sys_info.screen_height}}，鼠标位置 ({{sys_info.mouse_x}}, {{sys_info.mouse_y}})，当前活动窗口「{{sys_info.active_window}}」",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "级别可换成 信息/成功/警告/错误；内容里可插任意 {{变量}}，如 {{表格[0]['名称']}}",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成。把内容换成你自己的变量与提示语，即可用在任何流程里做标记。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "结尾总结，提示怎么改成自己的场景",
+      "children": []
+    }
+  ]
+}

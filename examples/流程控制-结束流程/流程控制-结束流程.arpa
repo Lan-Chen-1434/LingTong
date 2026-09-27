@@ -1,0 +1,70 @@
+{
+ "version": "1.0",
+ "name": "流程控制-结束流程",
+ "description": "演示「结束流程」：条件成立时立即终止整个流程（以成功状态结束）。把第 2 步的值改为 False 可看到后续步骤继续执行。运行无需准备。",
+ "hotkey_run": "f9",
+ "hotkey_stop": "f12",
+ "start_delay": 2.0,
+ "nodes": [
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "本示例演示「结束流程」：第 3 步条件成立时立即终止整个流程，第 4 步的日志不会被执行到。运行无需准备。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "data.set_var",
+   "params": {
+    "name": "check_pass",
+    "vtype": "布尔",
+    "value": "True"
+   },
+   "enabled": true,
+   "note": "把值改成 False，可看到流程不结束、继续走到最后的成功日志。",
+   "children": []
+  },
+  {
+   "type_id": "flow.if",
+   "params": {
+    "condition": "{{check_pass}} == True"
+   },
+   "enabled": true,
+   "note": "条件可换成你的校验表达式，如 {{count}} >= 100。",
+   "children": [
+    {
+     "type_id": "flow.stop",
+     "params": {
+      "message": "演示：条件成立，主动结束流程"
+     },
+     "enabled": true,
+     "note": "「结束原因」会写入运行日志；「标记为失败」开启时以失败状态结束，适合校验不通过时中止。",
+     "children": []
+    }
+   ]
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "（如果上一节点触发了结束流程，这行不会被执行——把 check_pass 改为 False 即可看到）"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "成功",
+    "message": "完成：按需提前结束流程。改成自己的场景：把「结束流程」放进「条件判断」分支，用于校验失败、全部处理完成等收尾点。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  }
+ ]
+}

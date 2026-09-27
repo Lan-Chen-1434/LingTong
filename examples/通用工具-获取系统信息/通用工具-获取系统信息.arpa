@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "name": "通用工具-获取系统信息",
+  "description": "演示获取系统信息：把屏幕分辨率、鼠标位置、活动窗口标题等存入字典变量。运行前无需准备。macOS 同样支持，分辨率/鼠标/活动窗口均可用。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "message": "本示例演示「获取系统信息」：读取分辨率、鼠标位置、活动窗口标题存入 sys_info。",
+        "level": "信息",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.system_info",
+      "params": {
+        "save_var": "sys_info",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "存入变量可改名；结果可用 {{sys_info.screen_width}}、{{sys_info.active_window}} 等逐项引用",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "message": "分辨率 {{sys_info.screen_width}}×{{sys_info.screen_height}}；鼠标 ({{sys_info.mouse_x}}, {{sys_info.mouse_y}})；活动窗口「{{sys_info.active_window}}」；时间 {{sys_info.time}}",
+        "level": "信息",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成。常用于按分辨率换算坐标、或记录运行环境；取单值也可直接引用对应键。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

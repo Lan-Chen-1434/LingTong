@@ -1,0 +1,64 @@
+{
+  "version": "1.0",
+  "name": "鼠标操作-获取鼠标当前位置",
+  "description": "演示读取鼠标当前坐标并存入变量，随后用变量点击刚才的位置。运行后会有 3 秒倒计时，请在倒计时内把鼠标移到你想要记录的位置。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示：读取鼠标当前位置存入变量，再用变量点击该位置。2 秒后开始。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "mouse.get_position",
+      "params": {
+        "save_var": "mouse_pos",
+        "delay": 3.0
+      },
+      "enabled": true,
+      "note": "先等待 3 秒再读取：倒计时内把鼠标移到目标处；存入变量名可改，后续用 {{mouse_pos.x}} / {{mouse_pos.y}} 引用",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "读取到的坐标：x = {{mouse_pos.x}}，y = {{mouse_pos.y}}"
+      },
+      "enabled": true,
+      "note": "展示上一步的输出变量",
+      "children": []
+    },
+    {
+      "type_id": "mouse.click",
+      "params": {
+        "use_var": true,
+        "x": "mouse_pos.x",
+        "y": "mouse_pos.y",
+        "button": "左键",
+        "clicks": 1,
+        "duration": 0.3
+      },
+      "enabled": true,
+      "note": "坐标来自变量：X/Y 填变量名（不带大括号），点击刚才记录的位置",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "演示完成 ✔ 读取坐标后可配合图像识别（last_point.x/last_point.y）做二次点击，或先记录再稍后回来操作同一位置。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

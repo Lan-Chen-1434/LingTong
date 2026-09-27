@@ -1,0 +1,49 @@
+{
+ "version": "1.0",
+ "name": "窗口系统-获取窗口列表",
+ "description": "演示「获取窗口列表」：列出当前所有窗口标题存入变量并打印。运行无需准备。",
+ "hotkey_run": "f9",
+ "hotkey_stop": "f12",
+ "start_delay": 2.0,
+ "nodes": [
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "本示例演示「获取窗口列表」：第 2 步把当前所有窗口标题存进 windows 变量，第 3 步打印出来。运行无需准备。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "win.list",
+   "params": {
+    "save_var": "windows"
+   },
+   "enabled": true,
+   "note": "变量名可改；找不到目标窗口时，可把列表写进日志排查当前窗口标题。",
+   "children": []
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "当前所有窗口标题：{{windows}}"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "成功",
+    "message": "完成：窗口标题列表已存入变量。改成自己的场景：配合「遍历变量」循环 + 「激活窗口」逐个检查或处理多个窗口。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  }
+ ]
+}

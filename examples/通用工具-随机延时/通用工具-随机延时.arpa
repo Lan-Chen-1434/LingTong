@@ -1,0 +1,66 @@
+{
+  "version": "1.0",
+  "name": "通用工具-随机延时",
+  "description": "演示随机延时：在区间内均匀随机等待，让自动化节奏更像真人。运行前无需准备；按需调整最短/最长秒数。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "message": "本示例演示「随机延时」：每次运行都会在区间内随机等待一段时间。",
+        "level": "信息",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.random_delay",
+      "params": {
+        "min_s": 1.0,
+        "max_s": 3.0,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "最短/最长按自己的节奏改；填反了会自动交换，不会报错",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "message": "随机等待已结束。可把随机延时插在两次点击之间，模拟真人操作节奏。",
+        "level": "信息",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成。改成你需要的区间（如 0.5~2.0 秒），插到点击、输入等步骤之间即可。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

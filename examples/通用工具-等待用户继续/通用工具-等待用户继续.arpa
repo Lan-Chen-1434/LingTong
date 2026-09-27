@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "name": "通用工具-等待用户继续",
+  "description": "演示等待用户继续：弹窗暂停流程，人工确认（扫码、核对等）后继续。运行后会弹出提示框，点击「继续」即完成。Windows/macOS 均弹窗。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "message": "本示例演示「等待用户继续」：接下来会弹窗，人工确认后流程继续。",
+        "level": "信息",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.wait_user",
+      "params": {
+        "message": "请完成人工操作（如扫码登录）后点击「继续」",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "提示文字改成你的场景说明，支持 {{变量}} 插值，如 请核对第 {{num}} 条数据",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "用户已确认，流程继续。把此步骤插在需要人工介入的环节（验证码、扫码、核对）即可。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

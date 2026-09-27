@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "name": "鼠标操作-鼠标滚轮",
+  "description": "演示滚动鼠标滚轮翻页：正数向下滚、负数向上滚，可设置重复次数匀速滚动长页面。运行前请把鼠标移到一个可滚动的窗口内（浏览器/文档），或修改步骤里的「滚轮位置 X/Y」直接指定窗口内的位置。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示：鼠标滚轮翻页（正数向下、负数向上）。2 秒后开始，请先把鼠标移到一个可滚动的窗口内（如浏览器），或修改步骤的滚轮位置 X/Y。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "mouse.scroll",
+      "params": {
+        "amount": 3,
+        "repeat": 5,
+        "gap": 0.2
+      },
+      "enabled": true,
+      "note": "匀速向下翻页：滚 5 次、每次 3 格、间隔 0.2 秒；如需指定窗口，填滚轮位置 X/Y（-1 表示当前位置）",
+      "children": []
+    },
+    {
+      "type_id": "mouse.scroll",
+      "params": {
+        "amount": -10,
+        "repeat": 2,
+        "gap": 0.1
+      },
+      "enabled": true,
+      "note": "快速向上回滚：负数向上，每次 10 格",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "演示完成 ✔ 把滚动格数、重复次数换成你自己的翻页需求即可；滚轮位置 X/Y 填窗口内坐标可对指定窗口滚动（macOS 上部分程序需在系统设置中授权滚动）。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

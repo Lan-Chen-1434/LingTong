@@ -1,0 +1,49 @@
+{
+ "version": "1.0",
+ "name": "窗口系统-结束进程",
+ "description": "演示「结束进程」：先启动记事本，再按进程名结束它。运行会自动打开再关闭记事本，无需准备；macOS 把进程名换成 TextEdit（不带 .exe）。",
+ "hotkey_run": "f9",
+ "hotkey_stop": "f12",
+ "start_delay": 2.0,
+ "nodes": [
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "本示例演示「结束进程」：第 2 步启动记事本，第 3 步按进程名结束它。运行会自动打开再关闭记事本。macOS 写法见第 3 步备注。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "sys.run",
+   "params": {
+    "path": "notepad.exe",
+    "wait": 1.0
+   },
+   "enabled": true,
+   "note": "先启动一个目标程序用于演示；macOS 填 /usr/bin/open、参数 -a TextEdit。",
+   "children": []
+  },
+  {
+   "type_id": "sys.kill",
+   "params": {
+    "name": "notepad.exe"
+   },
+   "enabled": true,
+   "note": "进程名不含路径，Windows 自动补 .exe；macOS 填 TextEdit。「强制结束」关闭 = 温和请求退出，避免丢失未保存数据。",
+   "children": []
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "成功",
+    "message": "完成：进程已结束。改成自己的场景：填要结束的进程名，如卡死的弹窗进程。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "version": "1.0",
+ "name": "流程控制-异常捕获",
+ "description": "演示「异常捕获」：容器内的步骤故意失败（结束不存在的进程），出错不中断流程。运行无需准备。",
+ "hotkey_run": "f9",
+ "hotkey_stop": "f12",
+ "start_delay": 2.0,
+ "nodes": [
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "本示例演示「异常捕获」：第 2 步里的「结束进程」故意指向不存在的进程让它失败，被捕获后流程继续走到成功日志。运行无需准备。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "flow.try",
+   "params": {},
+   "enabled": true,
+   "note": "把易错步骤（点击、输入、调用程序等）拖进本容器，出错不中断；「异常处理」分支在界面添加节点时自动附带，里面写兜底步骤（如失败截图）。",
+   "children": [
+    {
+     "type_id": "sys.kill",
+     "params": {
+      "name": "not_exist_demo"
+     },
+     "enabled": true,
+     "note": "故意让它失败来演示捕获；换成你自己的易错步骤。",
+     "children": []
+    }
+   ]
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "成功",
+    "message": "完成：上面的失败步骤被「异常捕获」接住，流程没有中断。改成自己的场景：把易错步骤放进容器，出错后的补救步骤拖进「异常处理」分支。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  }
+ ]
+}

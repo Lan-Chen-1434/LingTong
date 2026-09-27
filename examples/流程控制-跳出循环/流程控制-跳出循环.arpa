@@ -1,0 +1,69 @@
+{
+ "version": "1.0",
+ "name": "流程控制-跳出循环",
+ "description": "演示「跳出循环」：循环最多 10 次，序号到 3 时满足条件立即结束循环。运行无需准备。",
+ "hotkey_run": "f9",
+ "hotkey_stop": "f12",
+ "start_delay": 2.0,
+ "nodes": [
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "本示例演示「跳出循环」：循环上限 10 次，但第 3 次时条件成立、提前跳出，后面的轮数不再执行。运行无需准备。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "flow.loop",
+   "params": {
+    "mode": "固定次数",
+    "times": 10,
+    "loop_index_name": "i"
+   },
+   "enabled": true,
+   "note": "循环上限与跳出条件请按场景调整；「无限循环」必须配合「跳出循环」使用。",
+   "children": [
+    {
+     "type_id": "flow.if",
+     "params": {
+      "condition": "{{i}} >= 3"
+     },
+     "enabled": true,
+     "note": "把条件换成你的真实停止条件，如「图像识别成功」。",
+     "children": [
+      {
+       "type_id": "flow.break",
+       "params": {},
+       "enabled": true,
+       "note": "命中后立即结束当前所在的循环。",
+       "children": []
+      }
+     ]
+    },
+    {
+     "type_id": "util.log",
+     "params": {
+      "level": "信息",
+      "message": "第 {{i}} 次循环（i 到 3 之后这行不会再出现）"
+     },
+     "enabled": true,
+     "note": "",
+     "children": []
+    }
+   ]
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "成功",
+    "message": "完成：循环在第 3 轮后跳出，没有跑满 10 次。改成自己的场景：在循环里用「条件判断」包住本节点，条件换成「找到目标 / 处理完成」等。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  }
+ ]
+}

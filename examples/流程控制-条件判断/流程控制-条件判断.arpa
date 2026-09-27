@@ -1,0 +1,71 @@
+{
+ "version": "1.0",
+ "name": "流程控制-条件判断",
+ "description": "演示「条件判断」：给 score 赋值 86，条件成立时执行分支内的步骤。「否则」分支在界面添加节点时会自动附带。运行无需准备。",
+ "hotkey_run": "f9",
+ "hotkey_stop": "f12",
+ "start_delay": 2.0,
+ "nodes": [
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "本示例演示「条件判断」：第 2 步给 score 赋值 86，第 3 步判断 {{score}} >= 60 是否成立。运行无需准备。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "data.set_var",
+   "params": {
+    "name": "score",
+    "vtype": "数字",
+    "value": "86"
+   },
+   "enabled": true,
+   "note": "演示数据：把值改成 59 可看到分支不再执行。",
+   "children": []
+  },
+  {
+   "type_id": "flow.if",
+   "params": {
+    "condition": "{{score}} >= 60"
+   },
+   "enabled": true,
+   "note": "条件表达式可换：支持 and / or / 并且 / 或者、> < >= <= == !=、包含 / 不包含，如 {{price}} < 100 and {{存在}} == True。",
+   "children": [
+    {
+     "type_id": "util.log",
+     "params": {
+      "level": "成功",
+      "message": "{{score}} 分：条件成立，正在执行分支内的步骤"
+     },
+     "enabled": true,
+     "note": "",
+     "children": []
+    },
+    {
+     "type_id": "util.log",
+     "params": {
+      "level": "信息",
+      "message": "分支里可以放多个步骤，会按顺序依次执行"
+     },
+     "enabled": true,
+     "note": "",
+     "children": []
+    }
+   ]
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "成功",
+    "message": "完成：条件成立时执行了分支内步骤。改成自己的场景：换「条件」表达式，把要区分执行的步骤拖进分支里（不成立的分支拖到自动附带的「否则」下）。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  }
+ ]
+}
