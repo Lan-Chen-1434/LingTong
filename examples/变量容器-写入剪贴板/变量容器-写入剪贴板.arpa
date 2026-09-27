@@ -1,0 +1,68 @@
+{
+  "version": "1.0",
+  "name": "变量容器-写入剪贴板",
+  "description": "演示把文本（含变量）写入剪贴板，运行后到记事本（macOS 用 TextEdit）按 Ctrl+V 验证。无需准备。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示：把拼好的文本（含变量）写入剪贴板。运行后可打开记事本按 Ctrl+V 验证。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "data.set_var",
+      "params": {
+        "name": "user_name",
+        "vtype": "字符串",
+        "op": "赋值",
+        "value": "张三",
+        "save_prev": false,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "先准备一个变量，名字和内容改成自己的",
+      "children": []
+    },
+    {
+      "type_id": "data.clipboard_write",
+      "params": {
+        "text": "您好 {{user_name}}，共 3 条记录待处理。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "内容支持 {{变量}} 插值，多行文本原样保留；改成要复制的文本",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成：已写入剪贴板。换成自己的场景——改「写入剪贴板」步骤的内容，再配合键盘步骤的 Ctrl+V 粘贴。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

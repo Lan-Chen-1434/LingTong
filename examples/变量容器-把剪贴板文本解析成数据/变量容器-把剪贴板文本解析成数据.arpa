@@ -1,0 +1,69 @@
+{
+  "version": "1.0",
+  "name": "变量容器-把剪贴板文本解析成数据",
+  "description": "演示把剪贴板里的表格文本解析成数据表。运行前先从 Excel 或网页表格复制多行数据（macOS 可用 Numbers 替代）。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 3.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示：把剪贴板里的表格文本解析成数据。运行前请先从 Excel 或网页表格复制好几行数据（含表头）。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "data.from_clipboard",
+      "params": {
+        "split": "按换行+制表符(表格)",
+        "has_header": true,
+        "save_var": "order_rows",
+        "filter_empty": true,
+        "also_to_table": false,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "运行前确保已复制好表格数据；一行一条的清单请把 按什么切分 改为「按换行」",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "解析结果：{{order_rows}}",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成：剪贴板解析演示。换成自己的场景——复制自己的表格后运行，再用「遍历变量」循环逐条处理 {{order_rows}}。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

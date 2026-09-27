@@ -1,0 +1,85 @@
+{
+  "version": "1.0",
+  "name": "变量容器-正则提取文本",
+  "description": "演示用正则从一段文本里提取全部价格。直接运行即可；把示例文本和正则表达式换成自己的。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示：用正则从文本里提取内容。直接运行即可，文本和正则都是内置示例。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "data.set_var",
+      "params": {
+        "name": "page_text",
+        "vtype": "字符串",
+        "op": "赋值",
+        "value": "苹果 12.50 元，香蕉 3.20 元，橙子 8.00 元",
+        "save_prev": false,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "这里放一段你的示例文本（也可换成 {{copied}} 等抓取结果）",
+      "children": []
+    },
+    {
+      "type_id": "data.regex",
+      "params": {
+        "source": "{{page_text}}",
+        "pattern": "(\\d+\\.\\d{2})",
+        "mode": "全部(列表)",
+        "save_var": "prices",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "用括号包住要提取的部分；取结果 选「第一个」只取首个匹配",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "提取到的全部价格：{{prices}}",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成：正则提取演示。换成自己的场景——改源文本、正则和取结果方式（如手机号 (1\\d{10})）。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

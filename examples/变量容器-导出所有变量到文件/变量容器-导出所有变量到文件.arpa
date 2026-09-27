@@ -1,0 +1,68 @@
+{
+  "version": "1.0",
+  "name": "变量容器-导出所有变量到文件",
+  "description": "演示把流程里的全部变量导出成 JSON 快照，运行后到 output/txt/ 查看结果文件。可用来排查变量取值。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示：把流程中的全部变量导出为 JSON 快照。运行后查看示例文件夹 output/txt/ 下的结果。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "data.set_var",
+      "params": {
+        "name": "demo_text",
+        "vtype": "字符串",
+        "op": "赋值",
+        "value": "AutoRPA 变量快照演示",
+        "save_prev": false,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "造一个示例变量，实际使用时快照会包含它之前所有步骤的变量",
+      "children": []
+    },
+    {
+      "type_id": "data.export_var",
+      "params": {
+        "path": "output/txt/vars_{{timestamp}}.json",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "保存路径留空用默认 output/txt/vars.json；文件名带 {{timestamp}} 可避免覆盖；绝对路径 Windows 用 C:/...、macOS 用 /Users/...",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成：变量快照已导出。换成自己的场景——把本步骤放到要排查的位置后面，打开 JSON 核对各变量取值。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

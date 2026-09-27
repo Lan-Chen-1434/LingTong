@@ -1,0 +1,124 @@
+{
+  "version": "1.0",
+  "name": "04-循环处理-逐条处理列表数据",
+  "description": "演示循环与变量：遍历变量逐条处理，并统计进度。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 1.0,
+  "nodes": [
+    {
+      "type_id": "data.set_var",
+      "params": {
+        "name": "total",
+        "vtype": "字符串",
+        "op": "赋值",
+        "value": "0",
+        "save_prev": false,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "data.set_var",
+      "params": {
+        "name": "names",
+        "vtype": "字符串",
+        "op": "赋值",
+        "value": "张三,李四,王五,赵六",
+        "save_prev": false,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "这里可以改成 {{file_text}} 从文件读取",
+      "children": []
+    },
+    {
+      "type_id": "flow.loop",
+      "params": {
+        "mode": "遍历变量",
+        "times": 3,
+        "loop_index_name": "loop_index",
+        "dataset": "{{names}}",
+        "src_type": "自动",
+        "item_var": "name",
+        "condition": "{{count}} < 10",
+        "max_times": 200,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": [
+        {
+          "type_id": "util.log",
+          "params": {
+            "level": "信息",
+            "message": "正在处理第 {{loop_index}} 个：{{name}}",
+            "on_error": "停止流程",
+            "retry": 3,
+            "retry_interval": 1.0,
+            "timeout": 0.0
+          },
+          "enabled": true,
+          "note": "",
+          "children": []
+        },
+        {
+          "type_id": "data.set_var",
+          "params": {
+            "name": "total",
+            "vtype": "字符串",
+            "op": "数字相加",
+            "value": "1",
+            "save_prev": false,
+            "on_error": "停止流程",
+            "retry": 3,
+            "retry_interval": 1.0,
+            "timeout": 0.0
+          },
+          "enabled": true,
+          "note": "",
+          "children": []
+        },
+        {
+          "type_id": "sys.wait",
+          "params": {
+            "seconds": 0.3,
+            "random_extra": 0.0,
+            "on_error": "停止流程",
+            "retry": 3,
+            "retry_interval": 1.0,
+            "timeout": 0.0
+          },
+          "enabled": true,
+          "note": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "全部处理完毕，累计处理 {{total}} 条",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "version": "1.0",
+  "name": "变量容器-读取剪贴板",
+  "description": "演示把剪贴板里的文字读进变量。运行前请先手动复制一段文字（Windows/macOS 通用）。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示：读取剪贴板文字到变量。运行前请先手动复制一段文字。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "data.clipboard_read",
+      "params": {
+        "save_var": "clip",
+        "on_empty": "只警告",
+        "trim": true,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "存入变量名可自定义；内容为空时 选「报错停止」可在关键场景强制中断",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "剪贴板读到 {{clip}}",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成：剪贴板读取演示。换成自己的场景——改存入变量名，并在后续步骤用 {{clip}} 引用。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

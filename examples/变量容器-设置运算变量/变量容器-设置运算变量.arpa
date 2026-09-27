@@ -1,0 +1,86 @@
+{
+  "version": "1.0",
+  "name": "变量容器-设置运算变量",
+  "description": "演示设置变量与常用运算（赋值、数字相加、_prev 备份旧值）。直接运行即可，把变量名和值改成自己的数据。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示：给变量赋值、数字累加、用 _prev 备份旧值。直接运行即可，可把值改成自己的数据。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "data.set_var",
+      "params": {
+        "name": "price",
+        "vtype": "数字",
+        "op": "赋值",
+        "value": "9.9",
+        "save_prev": true,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "变量名/值改成自己的；save_prev 开启后可用 {{_prev}} 拿到改之前的值",
+      "children": []
+    },
+    {
+      "type_id": "data.set_var",
+      "params": {
+        "name": "price",
+        "op": "数字相加",
+        "value": "0.6",
+        "vtype": "字符串",
+        "save_prev": false,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "运算方式非「赋值」时基于变量当前值计算，值 / 参数 填运算量",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "price 当前值 = {{price}}，改动前的旧值 = {{_prev}}",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成：变量赋值与运算演示。换成自己的场景——改第 2、3 步的变量名、运算方式和值即可。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

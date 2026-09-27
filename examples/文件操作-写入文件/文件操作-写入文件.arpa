@@ -1,0 +1,71 @@
+{
+  "version": "1.0",
+  "name": "文件操作-写入文件",
+  "description": "演示写入文件：把变量写成 txt/csv/xlsx/json。运行前无需准备；本例先把当前时间存成变量再写成文本文件。输出在 output/txt/ 下，Windows/macOS 通用（相对路径）。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "message": "本示例演示「写入文件」：先取当前时间存为变量 now_time，再把它写成文本文件。",
+        "level": "信息",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.current_time",
+      "params": {
+        "fmt": "日期时间（2026-09-26 17:31:50）",
+        "save_var": "now_time",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "这一步只是准备演示数据；换场景时写入变量可改成你的 rows、info 等任意变量",
+      "children": []
+    },
+    {
+      "type_id": "util.write_file",
+      "params": {
+        "path": "output/txt/运行记录.txt",
+        "format": "txt",
+        "input_var": "now_time",
+        "start_cell": "A1",
+        "list_direction": "横向",
+        "input_selector": "",
+        "input_vtype": "自动",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "写入变量改成你要输出的变量；格式选 xlsx 可存表格/列表（配合起始单元格与填充方向），json 仅支持字典",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成，已写入 output/txt/运行记录.txt。改成你的变量与路径即可，不存在的目录会自动创建。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

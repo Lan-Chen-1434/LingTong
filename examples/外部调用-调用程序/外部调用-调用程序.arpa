@@ -1,0 +1,63 @@
+{
+ "version": "1.0",
+ "name": "外部调用-调用程序",
+ "description": "演示「调用程序」：后台运行 python 命令并捕获输出，再弹出一个记事本不等它关闭。直接可运行（需命令行能执行 python）；macOS 把 notepad 换成 open -a TextEdit，命令名换成 python3。",
+ "hotkey_run": "f9",
+ "hotkey_stop": "f12",
+ "start_delay": 2.0,
+ "nodes": [
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "本示例演示「调用程序」：第 2 步运行 python 命令并捕获输出，第 4 步打开记事本后不等它关闭。运行前请确认命令行能执行 python。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "process.run",
+   "params": {
+    "program": "python",
+    "arguments": "-c \"print('hello from AutoRPA')\"",
+    "capture_output": true,
+    "save_var": "proc_result"
+   },
+   "enabled": true,
+   "note": "程序路径改成你要运行的程序（notepad、C:/app/run.exe 等）；「等待程序结束」保持开启才能拿到退出码和输出。macOS 用 python3。",
+   "children": []
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "程序输出：{{proc_result}}｜退出码：{{proc_result_code}}｜错误输出：{{proc_result_stderr}}（无错误时该变量为空）"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "process.run",
+   "params": {
+    "program": "notepad",
+    "wait_finish": false,
+    "hidden": true
+   },
+   "enabled": true,
+   "note": "演示「不等待结束 + 隐藏窗口」（仅 Windows 生效，macOS 无控制台窗口概念）；macOS 可填 open，参数填 -a TextEdit。运行后会真的弹出记事本，请手动关闭。",
+   "children": []
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "成功",
+    "message": "演示完成：把「程序路径 / 命令行参数」换成你自己的程序即可；需要结果就开「捕获输出」，需要表格就选输出类型为「表格」。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  }
+ ]
+}

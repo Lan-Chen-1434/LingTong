@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "name": "图像识别-图像点击",
+  "description": "演示图像点击（找图并点击目标）。运行前先选中「图像点击」步骤点【抓图取图】截一张目标按钮的图。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示：在屏幕上找到模板图并点击它，点击坐标回写变量 last_point。运行前请先给「图像点击」步骤抓图（点右侧【抓图取图】）。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "image.click",
+      "params": {
+        "confidence": 0.85,
+        "wait": 8.0,
+        "save_var": "last_point",
+        "on_error": "跳过此步"
+      },
+      "enabled": true,
+      "note": "运行前：选中此步骤，点右侧【抓图取图】截一张目标图；已设失败策略=跳过此步，未抓图也能跑通流程",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "点击完成，命中坐标 {{last_point.x}}, {{last_point.y}}，相似度 {{last_point.score}}"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "图像点击演示结束。改成自己的场景：替换模板图、按需要把操作方式改为双击/右键单击，或改用锚点偏移点击点不好截的目标。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

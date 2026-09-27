@@ -1,0 +1,68 @@
+{
+  "version": "1.0",
+  "name": "文件操作-读取文件",
+  "description": "演示读取文件：自动按格式解析成变量（txt→字符串、json→字典、Excel→表格/列表）。运行前已预置 input/txt/示例数据.txt；读自己的文件时改「文件路径」参数。Windows 路径如 C:/数据/a.xlsx，macOS 如 /Users/你/a.xlsx。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "message": "本示例演示「读取文件」：读取 input/txt/示例数据.txt 并存入变量 file_content。",
+        "level": "信息",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.read_file",
+      "params": {
+        "path": "input/txt/示例数据.txt",
+        "format": "txt",
+        "save_var": "file_content",
+        "encoding": "utf-8",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "文件路径改成你要读的文件；格式选「自动检测」即可按扩展名解析，Excel 可用 {{file_content[0]['列名']}} 取值",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "message": "读到的内容：\n{{file_content}}",
+        "level": "信息",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成。换成你的文件路径即可；读 Excel/JSON 时结果分别是表格/字典变量。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

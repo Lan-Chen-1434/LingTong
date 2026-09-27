@@ -1,0 +1,67 @@
+{
+  "version": "1.0",
+  "name": "变量容器-复制当前选中内容",
+  "description": "演示 Ctrl+A + Ctrl+C 抓取当前窗口的全部文字。运行前先打开记事本（macOS 用 TextEdit）输入文字，并确保它是活动窗口。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 3.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示：Ctrl+A + Ctrl+C 抓取当前窗口文字。运行前请先打开记事本（macOS 用 TextEdit）输入文字，并让它保持活动窗口。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "data.copy_selection",
+      "params": {
+        "select_all": true,
+        "save_var": "page_text",
+        "wait": 0.5,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "运行前先把目标窗口激活为前台窗口；只复制已选中段落时把 先按 Ctrl+A 全选 关闭",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "抓取到的内容：{{page_text}}",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "完成：抓取当前窗口文字演示。换成自己的场景——运行前打开目标页面，抓取后用正则提取需要的内容。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

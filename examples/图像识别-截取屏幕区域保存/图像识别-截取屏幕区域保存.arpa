@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "name": "图像识别-截取屏幕区域保存",
+  "description": "演示截取屏幕区域保存为图片。运行前把「截取区域」改成你要截的屏幕区域（点框选区域拖选）。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示：把屏幕指定区域截图保存到 output/image/，保存路径写入变量 shot_path，截好的图可直接当模板图用。运行前修改截取区域。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "image.save_crop",
+      "params": {
+        "region": "100,100,600,400",
+        "path": "output/image/shot_{{timestamp}}.png",
+        "path_var": "shot_path"
+      },
+      "enabled": true,
+      "note": "截取区域改成你要截图的范围（点「框选区域」在屏幕上拖选，格式 x,y,w,h）",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "截图已保存到 {{shot_path}}，可直接作为其他图像识别步骤的模板图"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "截图保存演示结束。改成自己的场景：换截取区域即可；要提取图中文字/表格，填写「输出内容变量」（OCR 需先安装 OCR 组件，网页表格可用浏览器源代码方式，macOS 用 Safari 需辅助功能授权）。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

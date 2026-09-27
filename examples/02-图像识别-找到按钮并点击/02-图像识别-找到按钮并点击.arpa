@@ -1,0 +1,137 @@
+{
+  "version": "1.0",
+  "name": "02-图像识别-找到按钮并点击",
+  "description": "演示图像识别点击。第 3 步需要你自己截一张目标按钮的图（点该步骤的「抓图取图」）。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "① 先选中下面的「图像点击」步骤，在右侧点【抓图取图】截一张目标按钮",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "② 如果目标程序没在前台，先修改「激活窗口」的标题关键字",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "win.activate",
+      "params": {
+        "title": "记事本",
+        "exact": false,
+        "wait": 0.5,
+        "on_error": "跳过此步",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "改成你要操作的窗口标题",
+      "children": []
+    },
+    {
+      "type_id": "sys.wait",
+      "params": {
+        "seconds": 0.5,
+        "random_extra": 0.0,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "image.click",
+      "params": {
+        "image": [],
+        "click_type": "单击",
+        "locate_mode": "直接点击图像",
+        "anchor": [],
+        "direction": "右侧",
+        "distance": 300,
+        "confidence": 0.85,
+        "wait": 8.0,
+        "interval": 0.5,
+        "region": "",
+        "offset_x": 0,
+        "offset_y": 0,
+        "restore_cursor": false,
+        "save_var": "last_point",
+        "on_error": "跳过此步",
+        "retry": 1,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "还没配模板图，配好即生效",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "上一次点击位置：{{last_point.x}}, {{last_point.y}}",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "key.type",
+      "params": {
+        "text": "已经自动点到目标位置了。",
+        "clear_first": false,
+        "press_enter": true,
+        "interval": 0.02,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "图像识别演示结束",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

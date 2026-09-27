@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "name": "图像识别-查找所有匹配并批量点击",
+  "description": "演示查找所有匹配并批量点击（如列表每行的按钮）。运行前先抓一张列表里反复出现的元素图（如每行的「详情」按钮）。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示：找出屏幕上所有匹配项并把坐标存成表格变量 matches。运行前先抓一张列表里每行都有的元素图（默认只记录坐标不点击，安全）。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "image.find_all",
+      "params": {
+        "confidence": 0.88,
+        "action": "仅记录坐标",
+        "save_var": "matches",
+        "on_error": "跳过此步"
+      },
+      "enabled": true,
+      "note": "运行前：选中此步骤，点右侧【抓图取图】截一张目标图；已设失败策略=跳过此步，未抓图也能跑通流程；要真正批量点击把「对每个匹配项」改为依次单击",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "匹配结果已存入 matches（x / y / score 三列的表格），可接「遍历变量」循环逐行处理"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "批量查找演示结束。改成自己的场景：换模板图、需要批量打开时把操作改为依次双击；配合「最多处理个数」防止误点过多。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

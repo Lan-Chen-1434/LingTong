@@ -1,0 +1,152 @@
+{
+  "version": "1.0",
+  "name": "03-数据抓取-复制内容并导出表格",
+  "description": "演示抓取+整理+导出。使用前请把浏览器打开到目标页面，并按需修改第 4 步的坐标。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 3.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "警告",
+        "message": "请先把浏览器打开到目标页面。3 秒后开始抓取。",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "win.activate",
+      "params": {
+        "title": "Chrome",
+        "exact": false,
+        "wait": 0.6,
+        "on_error": "跳过此步",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "改成你的浏览器窗口标题",
+      "children": []
+    },
+    {
+      "type_id": "sys.wait",
+      "params": {
+        "seconds": 0.8,
+        "random_extra": 0.0,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "mouse.click",
+      "params": {
+        "x": 520,
+        "y": 420,
+        "button": "左键",
+        "clicks": 1,
+        "use_var": false,
+        "duration": 0.15,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "改成要点击的列表区域坐标",
+      "children": []
+    },
+    {
+      "type_id": "data.copy_selection",
+      "params": {
+        "select_all": true,
+        "save_var": "copied",
+        "wait": 0.35,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "Ctrl+A + Ctrl+C 把页面文字抓下来",
+      "children": []
+    },
+    {
+      "type_id": "data.from_clipboard",
+      "params": {
+        "split": "按换行",
+        "has_header": true,
+        "filter_empty": true,
+        "save_var": "rows",
+        "also_to_table": true,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "按行拆成列表",
+      "children": []
+    },
+    {
+      "type_id": "flow.loop",
+      "params": {
+        "mode": "遍历变量",
+        "times": 3,
+        "loop_index_name": "loop_index",
+        "dataset": "{{rows}}",
+        "src_type": "自动",
+        "item_var": "item",
+        "condition": "{{count}} < 10",
+        "max_times": 200,
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": [
+        {
+          "type_id": "util.log",
+          "params": {
+            "level": "信息",
+            "message": "正在处理第 {{loop_index}} 个：{{item}}",
+            "on_error": "停止流程",
+            "retry": 3,
+            "retry_interval": 1.0,
+            "timeout": 0.0
+          },
+          "enabled": true,
+          "note": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "抓取完成，共 {{loop_total}} 条",
+        "on_error": "停止流程",
+        "retry": 3,
+        "retry_interval": 1.0,
+        "timeout": 0.0
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

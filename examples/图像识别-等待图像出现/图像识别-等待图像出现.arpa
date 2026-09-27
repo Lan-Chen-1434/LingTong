@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "name": "图像识别-等待图像出现",
+  "description": "演示等待图像出现（等待页面/元素加载）。运行前先给「等待图像出现」步骤抓图，截取加载完成后会出现的元素。",
+  "hotkey_run": "f9",
+  "hotkey_stop": "f12",
+  "start_delay": 2.0,
+  "nodes": [
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "本示例演示：阻塞等待某个界面元素出现（常用于等页面加载完），出现的位置存入变量 tip_pos。运行前先给该步骤抓图。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "image.wait",
+      "params": {
+        "wait": 15.0,
+        "save_var": "tip_pos",
+        "on_error": "跳过此步"
+      },
+      "enabled": true,
+      "note": "运行前：选中此步骤，点右侧【抓图取图】截一张目标图；已设失败策略=跳过此步，未抓图也能跑通流程",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "信息",
+        "message": "图像已出现，位置 {{tip_pos.x}}, {{tip_pos.y}}（相似度 {{tip_pos.score}}）"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    },
+    {
+      "type_id": "util.log",
+      "params": {
+        "level": "成功",
+        "message": "等待图像演示结束。改成自己的场景：换成你的页面标志图、按需加长「最长等待」；要等待弹窗/加载动画消失则开启「改为等待图像消失」。"
+      },
+      "enabled": true,
+      "note": "",
+      "children": []
+    }
+  ]
+}

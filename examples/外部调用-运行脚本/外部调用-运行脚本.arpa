@@ -1,0 +1,62 @@
+{
+ "version": "1.0",
+ "name": "外部调用-运行脚本",
+ "description": "演示「运行脚本」：先用 Python 脚本输出 JSON 表格存入变量，再用 Windows CMD 查本机 IP。Windows 可直接运行；macOS 请把脚本类型改为 Shell (Bash/Zsh)，CMD 步骤内容换成 ifconfig | grep inet。",
+ "hotkey_run": "f9",
+ "hotkey_stop": "f12",
+ "start_delay": 2.0,
+ "nodes": [
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "本示例演示「运行脚本」：第 2 步用 Python 输出 JSON 表格，第 4 步用 Windows CMD 查本机 IP（macOS 改用 Shell: ifconfig | grep inet）。脚本内容直接写在步骤里，无需准备文件。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "process.run_script",
+   "params": {
+    "script": "import json\nrows = [[\"商品\", \"销量\"], [\"苹果\", 3], [\"香蕉\", 5]]\nprint(json.dumps(rows, ensure_ascii=False))",
+    "save_var": "sales_table",
+    "save_type": "表格"
+   },
+   "enabled": true,
+   "note": "脚本内容可换成你的数据处理代码；输出的 JSON 会按「表格」解析，工作目录留空 = 本流程文件夹，脚本里相对路径都相对于它。",
+   "children": []
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "信息",
+    "message": "表格变量：{{sales_table}}｜退出码：{{sales_table_code}}｜错误输出：{{sales_table_stderr}}（无错误时为空）"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  },
+  {
+   "type_id": "process.run_script",
+   "params": {
+    "script_type": "Windows CMD",
+    "script": "ipconfig | findstr IPv4",
+    "save_var": "ip_info"
+   },
+   "enabled": true,
+   "note": "Windows 演示查 IP；macOS 把脚本类型改为 Shell (Bash/Zsh)、内容改为 ifconfig | grep inet。PowerShell 可演示 Get-Date -Format yyyyMMdd。",
+   "children": []
+  },
+  {
+   "type_id": "util.log",
+   "params": {
+    "level": "成功",
+    "message": "演示完成：把脚本内容换成你自己的即可；列表/字典/表格类型建议输出 JSON，表格也可输出 CSV 文本（首行表头）。"
+   },
+   "enabled": true,
+   "note": "",
+   "children": []
+  }
+ ]
+}
