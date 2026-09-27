@@ -11,6 +11,7 @@ permissions:
 
 env:
   PYTHON_VERSION: "3.12"
+  PYTHONUTF8: "1"               # Windows 云服务器控制台是 cp1252，强制 Python UTF-8 模式防中文打印报错
 
 jobs:
   # ---------------------------------------------------------------- Windows
