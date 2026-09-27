@@ -1,0 +1,97 @@
+name: 打包发布
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHON_VERSION: "3.12"
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          architecture: x64
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+ pip install -r requirements.txt pyinstaller
+      - name: 确定版本号
+        id: ver
+        shell: bash
+        run: |
+          if [ "${{ github.ref_type }}" = "tag" ]; then
+            V="${{ github.ref_name }}"
+          else
+            V=$(python -c "from core import __version__; print(__version__)")
+          fi
+          echo "v=${V#v}" >> "$GITHUB_OUTPUT"
+      - name: PyInstaller 打包
+        env:
+          LINGTONG_ICON: assets/icons/app.ico
+          LINGTONG_VERSION: ${{ steps.ver.outputs.v }}
+        run: python -m PyInstaller LingT.spec --noconfirm --clean
+      - name: 组装发布包
+        run: python tools/make_release.py --version ${{ steps.ver.outputs.v }}
+      - name: 上传产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: LingTong-v${{ steps.ver.outputs.v }}-win64
+          path: release/LingTong-v${{ steps.ver.outputs.v }}-win64.zip
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+ with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          architecture: arm64
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pyinstaller
+      name: 确定版本号
+        id: ver
+        shell: bash
+        run: |
+          if [ "${{ github.ref_type }}" = "tag" ]; then
+            V="${{ github.ref_name }}"
+          else
+            V=$(python -c "from core import __version__; print(__version__)")
+          fi
+          echo "v=${V#v}" >> "$GITHUB_OUTPUT"
+      - name: PyInstaller 打包
+        env:
+          LINGTONG_ICON: assets/icons.icns
+          LINGTONG_VERSION: ${{ steps.ver.outputs.v }}
+        run: python -m PyInstaller LingTong.spec --noconfirm --clean
+      - name: 组装发布包
+        run: python tools/make_release.pyversion ${{ steps.ver.outputs.v }}
+      - name: 上传产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: LingTong-v${{ steps.ver.outputs.v }}-macos
+          path: release/LingTong-v${{ steps.ver.outputs.v }}-macos.tar.gz
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: [build-windows, build-macos]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-art@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+      - name: 创建 Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/*.zip artifacts/*.tar.gz
+ generate_release_notes: true
